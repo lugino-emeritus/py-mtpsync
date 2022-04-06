@@ -6,10 +6,10 @@ import os
 import shutil
 import time
 
-import ntlib.imp as ntimp
+import ntlib.imp
 
 __author__ = 'NTI (lugino-emeritus) <*@*.de>'
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 STATE_FILE = '.mtp_sync_state.json'
 
@@ -22,7 +22,7 @@ parser.add_argument('--size-only', action='store_true', help='only compare file 
 parser.add_argument('--write-state', action='store_true', help='write state file with --size-only')
 opts = parser.parse_args()
 
-ntimp.config_log(logging.DEBUG if opts.verbose else logging.INFO)
+ntlib.imp.config_log(logging.DEBUG if opts.verbose else logging.INFO)
 _srcpath = os.path.normpath(opts.src_path)
 _dstpath = os.path.normpath(opts.dst_path)
 
@@ -154,8 +154,11 @@ def time_mtp_state(dst_state):
 
 #-------------------------------------------------------
 
+def print_caption(s):
+	print(f"-----{s.join((' ', ' ')):-<50s}")
+
 ts_start = time.time()
-print(f"-----{' START SYNC ':-<50s}")
+print_caption('START SYNC')
 src_pstate = get_path_state(_srcpath)
 dst_pstate = get_path_state(_dstpath, include=src_pstate['dirs'])
 # scan destination before loading state file reduces time of read_mtp_state
@@ -194,5 +197,4 @@ except KeyboardInterrupt:
 finally:
 	if not opts.size_only or opts.write_state:
 		write_mtp_state(dst_pstate['files'])
-	s = f' DONE IN {(time.time()-ts_start):.2f}s '
-	print(f"-----{s:-<50s}")
+	print_caption(f'DONE IN {(time.time()-ts_start):.2f}s')
