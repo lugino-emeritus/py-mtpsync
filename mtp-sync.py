@@ -2,11 +2,11 @@
 import argparse
 import json
 import logging
+import ntlib.imp as ntimp
 import os
 import shutil
 import time
 
-import ntlib.imp
 
 __author__ = 'NTI (lugino-emeritus) <*@*.de>'
 __version__ = '0.1.1'
@@ -22,7 +22,7 @@ parser.add_argument('--size-only', action='store_true', help='only compare file 
 parser.add_argument('--write-state', action='store_true', help='write state file with --size-only')
 opts = parser.parse_args()
 
-ntlib.imp.config_log(logging.DEBUG if opts.verbose else logging.INFO)
+ntimp.config_log(logging.DEBUG if opts.verbose else logging.INFO)
 _srcpath = os.path.normpath(opts.src_path)
 _dstpath = os.path.normpath(opts.dst_path)
 
