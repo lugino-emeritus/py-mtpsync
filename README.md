@@ -6,7 +6,7 @@ A state file (`.mtp_sync_state.json`) is created in the destination folder conta
 
 #### Dependencies
 
-Python3.6 or newer is necessary.
+Python3.8 or newer.
 
 `ntlib.imp` from [here](https://github.com/lugino-emeritus/py-ntlib) is used to set a basic log config. It is not necessary, just remove the import statement and `ntimp.config_log` if you do not want to download it.
 
