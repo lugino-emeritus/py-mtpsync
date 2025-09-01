@@ -7,7 +7,6 @@ import os
 import shutil
 import time
 
-
 __author__ = 'NTI (lugino-emeritus) <*@*.de>'
 __version__ = '0.1.1'
 
@@ -26,7 +25,7 @@ ntimp.config_log(logging.DEBUG if opts.verbose else logging.INFO)
 _srcpath = os.path.normpath(opts.src_path)
 _dstpath = os.path.normpath(opts.dst_path)
 
-#-------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def _add_file_stat(path, files, dirs, include):
 	logging.debug('recursive scan of %s', path)
@@ -72,7 +71,7 @@ def sync_dirs(src_dirs, dst_dirs):
 		os.mkdir(path)
 		logging.debug('created dir %s', path)
 
-#-------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 class FileState:
 	def __init__(self, src_state, dst_state):
@@ -152,7 +151,7 @@ def time_mtp_state(dst_state):
 	write_mtp_state(dst_state)
 	return time.monotonic() - t0
 
-#-------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 def print_caption(s):
 	print(f"-----{s.join((' ', ' ')):-<50s}")
